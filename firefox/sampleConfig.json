@@ -1,0 +1,28 @@
+{
+	profiles : {
+		default : {
+			mods : [
+				{
+					url : 'https://klattmose.github.io/CookieClicker/CCSE.js',
+					name : 'CCSE',
+					autoLoad : true
+				},
+				{
+					url : 'https://klattmose.github.io/CookieClicker/FortuneCookie.js',
+					name : 'Fortune Cookie',
+					autoLoad : true
+				},
+				{
+					url : 'https://klattmose.github.io/CookieClicker/KlattmoseUtilities.js',
+					name : 'Klattmose Utilities',
+					autoLoad : true
+				},
+			],
+			saves : {
+				Game : '',
+				CCSE : ''
+			}
+		}
+	},
+	activeProfile : 'default'
+}

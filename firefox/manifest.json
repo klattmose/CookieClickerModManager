@@ -1,21 +1,35 @@
 {
-
-  "manifest_version": 2,
-  "name": "Cookie Clicker Mod Manager",
-  "version": "1.0",
-
-  "description": "",
-
-  "icons": {
-    "48": "icons/CCMM-48.png",
-    "96": "icons/CCMM-96.png"
-  },
-
-  "content_scripts": [
-    {
-      "matches": ["*://orteil.dashnet.org/cookieclicker*"],
-      "js": ["CCMM.js"]
-    }
-  ]
+	"manifest_version": 2,
+	"name": "Cookie Clicker Mod Manager",
+	"version": "0.01",
+	
+	"description": "Currently just automatically loads KlattmoseUtilites",
+	
+	"icons": {
+		"48": "icons/CCMM-48.png",
+		"96": "icons/CCMM-96.png"
+	},
+	
+	"content_scripts": [
+		{
+			"matches": [
+				"*://orteil.dashnet.org/cookieclicker/",
+				"*://orteil.dashnet.org/cookieclicker/beta/"
+			],
+			"js": ["CCMM.js"]
+		}
+	],
+	
+	"options_ui": {
+		"page": "options.html"
+	},
+	
+	"permissions": ["storage"],
+	
+	"applications": {
+		"gecko": {
+			"id": "CookieClickerModManager@dashnet.org" 
+		}
+	}
 
 }
