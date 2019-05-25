@@ -1,6 +1,6 @@
-var CCMM = {};
+if(CCMM === undefined) var CCMM = {};
 CCMM.name = 'Cookie Clicker Mod Manager';
-CCMM.version = '0.01';
+CCMM.version = '0.02';
 CCMM.GameVersion = '2.019';
 
 var Game = window.wrappedJSObject.Game;
@@ -49,52 +49,4 @@ CCMM.launch = function(){
 	requestAnimationFrame(CCMM.delay);
 }
 
-CCMM.defaultConfig = function(){
-	return {
-		profiles : {
-			default : {
-				mods : [
-					{
-						name : 'CCSE',
-						waitForScriptLoad : true,
-						extraDelay : 0
-					},
-				],
-				saves : {
-					Game : '',
-					CCSE : ''
-				}
-			}
-		},
-		mods : {
-			CCSE : 'https://klattmose.github.io/CookieClicker/CCSE.js',
-		},
-		activeProfile : 'default'
-	}
-}
-
-CCMM.loadData = function(){
-	function onError(error){
-		console.log(`Error: ${error}`);
-	}
-	
-	function onGot(item){
-		console.log('storage', item);
-		if(item.config) {
-			CCMM.config = item.config;
-		}else{
-			CCMM.config = CCMM.defaultConfig();
-			browser.storage.local.set({
-				config: CCMM.config
-			});
-		}
-		
-		CCMM.activeProfile = CCMM.config.profiles[CCMM.config.activeProfile];
-		CCMM.launch();
-	}
-	
-	var getting = browser.storage.local.get();
-	getting.then(onGot, onError);
-}
-
-CCMM.loadData();
+CCMM.loadData(CCMM.launch);
