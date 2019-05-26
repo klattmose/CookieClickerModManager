@@ -2,25 +2,15 @@ if(CCMM === undefined) var CCMM = {};
 
 CCMM.defaultConfig = function(){
 	return {
-		profiles : {
-			default : {
-				mods : [
-					{
-						name : 'CCSE',
-						waitForScriptLoad : true,
-						extraDelay : 0
-					},
-				],
-				saves : {
-					Game : '',
-					CCSE : ''
-				}
+		mods : [
+			{
+				name : 'CCSE',
+				url : 'https://klattmose.github.io/CookieClicker/CCSE.js',
+				enabled : 1,
+				waitForScriptLoad : 1,
+				extraDelay : 0
 			}
-		},
-		mods : {
-			CCSE : 'https://klattmose.github.io/CookieClicker/CCSE.js',
-		},
-		activeProfile : 'default',
+		],
 		enabled : true
 	}
 }
@@ -38,7 +28,6 @@ CCMM.loadData = function(callback){
 			CCMM.config = CCMM.defaultConfig();
 		}
 		
-		CCMM.activeProfile = CCMM.config.profiles[CCMM.config.activeProfile];
 		callback();
 	}
 	
@@ -50,4 +39,10 @@ CCMM.saveData = function(){
 	browser.storage.local.set({
 		config: CCMM.config
 	});
+}
+
+CCMM.GuessModId = function(url){
+	var id = url.split('/'); 
+	id = id[id.length - 1].split('.')[0];
+	return id;
 }

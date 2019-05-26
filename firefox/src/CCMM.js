@@ -10,27 +10,35 @@ CCMM.launch = function(){
 	CCMM.init = function(){
 		Game.Win('Third-party');
 		CCMM.onMod = 0;
-		if(CCMM.config.enabled && CCMM.onMod < CCMM.activeProfile.mods.length) requestAnimationFrame(CCMM.LoadMod);
+		if(CCMM.config.enabled && CCMM.onMod < CCMM.config.mods.length) requestAnimationFrame(CCMM.LoadMod);
 	}
 	
 	CCMM.LoadMod = function(){
-		var mod = CCMM.activeProfile.mods[CCMM.onMod++];
-		var url = CCMM.config.mods[mod.name];
-		var id = url.split('/'); id = id[id.length - 1].split('.')[0];
+		var mod = CCMM.config.mods[CCMM.onMod++];
+		var nextFunc = CCMM.onMod < CCMM.config.mods.length ? CCMM.LoadMod : CCMM.finalize;
 		
-		var nextFunc = CCMM.onMod < CCMM.activeProfile.mods.length ? CCMM.LoadMod : CCMM.finalize;
-		var delayFunc = mod.extraDelay ? function(){setTimeout(nextFunc, mod.extraDelay);} : function(){requestAnimationFrame(nextFunc)};
-		
-		var script = document.createElement('script');
-		script.id = 'modscript_' + id;
-		script.setAttribute('src', url);
-		
-		if(mod.waitForScriptLoad){
-			script.onload = delayFunc;
-			document.head.appendChild(script);
-		}else{
-			document.head.appendChild(script);
-			delayFunc();
+		if(mod.enabled){
+			var id = CCMM.GuessModId(mod.url);
+			
+			var delayFunc = mod.extraDelay ? function(){setTimeout(nextFunc, mod.extraDelay);} : function(){requestAnimationFrame(nextFunc)};
+			
+			var script = document.createElement('script');
+			script.id = 'modscript_' + id;
+			script.setAttribute('src', mod.url);
+			
+			if(mod.waitForScriptLoad){
+				script.onload = delayFunc;
+				document.head.appendChild(script);
+			}else{
+				document.head.appendChild(script);
+				delayFunc();
+			}
+			console.log('Loaded the mod ' + mod.url + ', ' + id + '.');
+			mod.isLoaded = 1;
+			
+		}else{ // Skip this one
+			requestAnimationFrame(nextFunc);
+			mod.isLoaded = 0;
 		}
 	}
 	
