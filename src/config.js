@@ -46,3 +46,9 @@ CCMM.GuessModId = function(url){
 	id = id[id.length - 1].split('.')[0];
 	return id;
 }
+
+window.browser = (function () {
+  return window.msBrowser ||
+    window.browser ||
+    window.chrome;
+})();

@@ -28,6 +28,7 @@
 			<span class="text">Register new mod</span>
 			<span class="arrow"></span>
 		</menuitem>
+		<menuitem id="padding" style="height:12px;"></menuitem>
 	</menu>
 </section>
 
@@ -37,6 +38,22 @@
 		<menuitem tabindex="0" class="go-back"></menuitem>
 		Options
 	</header>
+	<hr>
+	<h2>Your config:</h2>
+	<p><textarea rows="5" id="optionsConfigText"></textarea></p>
+	<menuitem id="optionImportConfig" tabindex="0">
+		<i class="icon fa fa-upload"></i>
+		<span class="text">Import config from above</span>
+	</menuitem>
+	<div id="optionsImportError" style="display:none;"></div>
+	<menuitem id="optionEportConfig" tabindex="0">
+		<i class="icon fa fa-download"></i>
+		<span class="text">Export config to file</span>
+	</menuitem>
+	<menuitem id="optionDefaultConfig" tabindex="0">
+		<i class="icon fa fa-flash"></i>
+		<span class="text">Restore default config</span>
+	</menuitem>
 </section>
 
 
