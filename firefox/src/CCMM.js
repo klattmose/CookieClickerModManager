@@ -10,7 +10,7 @@ CCMM.launch = function(){
 	CCMM.init = function(){
 		Game.Win('Third-party');
 		CCMM.onMod = 0;
-		if(CCMM.onMod < CCMM.activeProfile.mods.length) requestAnimationFrame(CCMM.LoadMod);
+		if(CCMM.config.enabled && CCMM.onMod < CCMM.activeProfile.mods.length) requestAnimationFrame(CCMM.LoadMod);
 	}
 	
 	CCMM.LoadMod = function(){

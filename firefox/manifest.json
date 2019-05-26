@@ -20,7 +20,7 @@
 		}
 	],
 
-	"browser_action": {
+	"page_action": {
 		"browser_style": false,
 		"default_icon": "icons/CCMM-48.png",
 		"default_popup": "/menu/menu.html",
@@ -32,7 +32,7 @@
 	},
 	
 	"options_ui": {
-		"page": "options.html"
+		"page": "/menu/menu.html"
 	},
 	
 	"permissions": ["storage"],

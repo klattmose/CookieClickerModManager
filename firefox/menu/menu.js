@@ -10,7 +10,11 @@ let gMainFocusedItem = null;	// TODO: this needs to be a stack.
 let gPendingTicker = null;
 let gScriptTemplates = {};
 
-///////////////////////////////////////////////////////////////////////////////
+
+//***********************************
+//    Base menu functionality
+//    Mostly copied from GreaseMonkey
+//***********************************
 function l(what){return document.getElementById(what);}
 
 function onLoad(){
@@ -81,6 +85,20 @@ function navigateToMainMenu(){
 	}
 }
 
+function switchFocus(move){
+	var section = document.querySelector('section.' + document.body.id);
+	var focusable = Array.from(section.querySelectorAll('[tabindex="0"]'));
+	var index = focusable.indexOf(document.activeElement);
+	if(index == -1 && move == -1) index = 0;
+	var len = focusable.length;
+	index = (index + move + len) % len;
+	focusable[index].focus();
+}
+
+function navigateAway(){
+	
+}
+
 
 window.addEventListener('DOMContentLoaded', onLoad, false);
 window.addEventListener('contextmenu', onContextMenu, false);
@@ -93,7 +111,9 @@ window.addEventListener('transitionstart', onTransitionStart, false);
 window.addEventListener('unload', navigateToMainMenu, false);
 
 
-///////////////////////////////////////////////////////////////////////////////
+//***********************************
+//    Menu button callbacks
+//***********************************
 function activate(el){
 	if(el.tagName == 'A'){
 		setTimeout(window.close, 0);
@@ -119,12 +139,7 @@ function activate(el){
 			document.body.id = 'options';
 			return;
 		case 'toggle-global-enabled':
-			CCMM.config.enabled = !CCMM.config.enabled;
-			if(CCMM.config.enabled){
-				l('globalEnabledIcon').classList.add('fa-check');
-			}else{
-				l('globalEnabledIcon').classList.remove('fa-check');
-			}
+			toggleGlobalEnabled();
 			return;
 	}
 
@@ -144,23 +159,22 @@ function activate(el){
 	console.info('activate unhandled:', el);
 }
 
-
-function switchFocus(move){
-	var section = document.querySelector('section.' + document.body.id);
-	var focusable = Array.from(section.querySelectorAll('[tabindex="0"]'));
-	var index = focusable.indexOf(document.activeElement);
-	if(index == -1 && move == -1) index = 0;
-	var len = focusable.length;
-	index = (index + move + len) % len;
-	focusable[index].focus();
+function toggleGlobalEnabled(){
+	CCMM.config.enabled = !CCMM.config.enabled;
+	if(CCMM.config.enabled){
+		l('globalEnabledIcon').classList.add('fa-check');
+	}else{
+		l('globalEnabledIcon').classList.remove('fa-check');
+	}
+	CCMM.saveData();
 }
 
 
-function navigateAway(){
-	
-}
 
-
+//***********************************
+//    Load the configuration
+//    and initialize the menu
+//***********************************
 function configLoaded(){
 	if(CCMM.config.enabled){
 		l('globalEnabledIcon').classList.add('fa-check');

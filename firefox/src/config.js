@@ -36,9 +36,6 @@ CCMM.loadData = function(callback){
 			CCMM.config = item.config;
 		}else{
 			CCMM.config = CCMM.defaultConfig();
-			browser.storage.local.set({
-				config: CCMM.config
-			});
 		}
 		
 		CCMM.activeProfile = CCMM.config.profiles[CCMM.config.activeProfile];
@@ -47,4 +44,10 @@ CCMM.loadData = function(callback){
 	
 	var getting = browser.storage.local.get();
 	getting.then(onGot, onError);
+}
+
+CCMM.saveData = function(){
+	browser.storage.local.set({
+		config: CCMM.config
+	});
 }
