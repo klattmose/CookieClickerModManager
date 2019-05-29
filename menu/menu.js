@@ -263,7 +263,7 @@ CCMM.ImportConfig = function(){
 		CCMM.saveData();
 		l('optionsImportError').style = 'display:none;';
 	}catch(err){
-		l('optionsImportError').innerHTML = err.message;
+		l('optionsImportError').textContent = err.message;
 		l('optionsImportError').style = 'display:block;';
 	}
 }
@@ -332,17 +332,47 @@ CCMM.detectLoadedMods = function(){
 }
 
 CCMM.refreshModlist = function(){
+	var modListDiv = l('modListDiv');
+	modListDiv.innerHTML = '';
+	
 	var str = '';
 	for(var i = 0; i < CCMM.config.mods.length; i++){
 		var mod = CCMM.config.mods[i];
-		str += '<div class="mod-listing">';
-		str += '<menuitem tabindex="0" id="ModEnabledButton' + i + '"><i id="ModEnabledIcon' + i + '" class="icon fa ' + (mod.enabled ? 'fa-check' : 'fa-times') + '"></i></menuitem>';
-		str += '<menuitem id="ModName' + i + '"><span class="text">' + mod.name + '</span></menuitem>';
-		str += '<menuitem tabindex="0" id="ModEditButton' + i + '" class="floatRight"><span class="text">Edit</span></menuitem>';
-		if(!mod.isLoaded) str += '<menuitem tabindex="0" id="ModLoadButton' + i + '" class="floatRight"><span class="text">Load</span></menuitem>';
-		str += '</div>';
+		
+		var div = document.createElement('div'); 
+			div.classList.add('mod-listing');
+		var enabledButton = document.createElement('menuitem'); 
+			enabledButton.setAttribute('tabindex', '0'); 
+			enabledButton.id = 'ModEnabledButton' + i; 
+			div.appendChild(enabledButton);
+		var enabledIcon = document.createElement('i'); 
+			enabledIcon.classList.add('icon'); 
+			enabledIcon.classList.add('fa'); 
+			enabledIcon.classList.add(mod.enabled ? 'fa-check' : 'fa-times'); 
+			enabledButton.appendChild(enabledIcon);
+		var nameItem = document.createElement('menuitem'); 
+			div.appendChild(nameItem);
+		var nameText = document.createElement('span'); 
+			nameText.classList.add('text'); 
+			nameText.textContent = mod.name; 
+			nameItem.appendChild(nameText);
+		var editButton = document.createElement('menuitem'); 
+			editButton.setAttribute('tabindex', '0'); 
+			editButton.id = 'ModEditButton' + i; 
+			editButton.classList.add('floatRight');
+			editButton.innerHTML = '<span class="text">Edit</span>'; 
+			div.appendChild(editButton);
+		if(!mod.isLoaded){
+			var loadButton = document.createElement('menuitem'); 
+				loadButton.setAttribute('tabindex', '0'); 
+				loadButton.id = 'ModLoadButton' + i; 
+				loadButton.classList.add('floatRight');
+				loadButton.innerHTML = '<span class="text">Load</span>'; 
+				div.appendChild(loadButton);
+		}
+		
+		modListDiv.appendChild(div);
 	}
-	l('modListDiv').innerHTML = str;
 }
 
 
