@@ -238,16 +238,8 @@ CCMM.editModDelete = function(){
 CCMM.LoadMod = function(id){
 	var i = Number(id.replace('ModLoadButton', ''));
 	var mod = CCMM.config.mods[i];
-	var id = CCMM.GuessModId(mod.url)
 	
-	var code = `
-		var script = document.createElement('script');
-		script.id = 'modscript_` + id + `';
-		script.setAttribute('src', ` + mod.url + `);
-		document.head.appendChild(script);
-		console.log('Loaded the mod ` + mod.url + `, ` + id + `.');
-	`
-	
+	var code = `CCMM.ModInjection('` + mod.url + `');`;
 	browser.tabs.executeScript({code : code});
 	
 	mod.isLoaded = 1;
@@ -335,12 +327,8 @@ CCMM.detectLoadedMods = function(){
 				}
 				ret;`
 	
-	if(chrome){
-		browser.tabs.executeScript({code: code}, onCompletion);
-	}else{
-		browser.tabs.executeScript({code: code}).then(onCompletion, onError);
-	}
-	
+	if(CCMM.language == 'chrome') browser.tabs.executeScript({code: code}, onCompletion);
+	else browser.tabs.executeScript({code: code}).then(onCompletion, onError);
 }
 
 CCMM.refreshModlist = function(){

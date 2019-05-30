@@ -67,7 +67,15 @@ CCMM.ScriptInjection = function(){
 	
 }
 
+CCMM.ModInjection = function(url){
+	var id = CCMM.GuessModId(url);
+	var script = document.createElement('script');
+	script.id = 'modscript_' + id;
+	script.setAttribute('src', url);
+	document.head.appendChild(script);
+}
+
 CCMM.loadData(CCMM.ScriptInjection);
 
 // This script brought to you by Chrome being stupid and screwing up page_action popups
-if(chrome) chrome.runtime.sendMessage({"message": "activate_icon"});
+if(CCMM.language == 'chrome') browser.runtime.sendMessage({"message": "activate_icon"});

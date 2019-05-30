@@ -43,8 +43,7 @@ section{
 
 /* Hide non-main sections by default. */
 section.options,
-section.editMod,
-section.user-script-options
+section.editMod
 {
 	position: absolute;
 	top: 0;
@@ -59,13 +58,8 @@ body#main-menu section.main-menu
 
 /* Slide the other menu in when it's active. */
 body#options section.options,
-body#editMod section.editMod,
-body#user-script-options section.user-script-options
+body#editMod section.editMod
 { margin-left: -100vw; }
-
-/* Second level, when going to third, is even further left! */
-body#user-script-options section.user-script
-{ margin-left: -200vw; }
 
 
 section header{
@@ -92,17 +86,13 @@ section menuitem.go-back{
 	box-sizing: content-box;
 	color: inherit;
 	display: inline-block;
-	height: 16px;
+	height: 100%;
 	margin: 4px 4px 0 4px;
 	padding: 8px;
 	vertical-align: -10px;	/* Relative to text, after padding. */
-	width: 16px;
 }
 section menuitem.go-back:hover{
 	background-color: var(--focus-color);
-}
-section menuitem.go-back::before{
-	content: url(/icons/back.svg);
 }
 
 /********************************** MENUS ************************************/
@@ -155,10 +145,6 @@ menuitem .icon img{
 	width: 16px;
 }
 
-menuitem.user-script{
-	padding-right: 24px;
-}
-
 menu heading{
 	color: #333;
 	font-style: italic;
@@ -178,7 +164,7 @@ menu heading{
 	display: inline;
 }
 
-menuitem.floatRight{
+.floatRight{
 	float : right;
 	opacity: 1.0;
 	height: 100%;

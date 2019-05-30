@@ -31,7 +31,8 @@ CCMM.loadData = function(callback){
 		callback();
 	}
 	
-	if(chrome) chrome.storage.local.get('config', onGot); else browser.storage.local.get('config').then(onGot, onError);
+	if(CCMM.language == 'chrome') browser.storage.local.get('config', onGot); 
+	else browser.storage.local.get('config').then(onGot, onError);
 }
 
 CCMM.saveData = function(){
@@ -46,8 +47,17 @@ CCMM.GuessModId = function(url){
 	return id;
 }
 
-window.browser = (function () {
-	return window.msBrowser ||
-		window.browser ||
-		window.chrome;
-})();
+
+// Multi-browser support
+if(window.msBrowser){
+	window.browser = window.msBrowser;
+	CCMM.language = 'edge';
+}
+else if(window.browser){
+	window.browser = window.browser;
+	CCMM.language = 'firefox';
+}
+else if(window.chrome){
+	window.browser = window.chrome;
+	CCMM.language = 'chrome';
+}
