@@ -1,10 +1,4 @@
 if(CCMM === undefined) var CCMM = {};
-CCMM.name = 'Cookie Clicker Mod Manager';
-CCMM.version = '0.02';
-CCMM.GameVersion = '2.019';
-
-var Game = window.wrappedJSObject.Game;
-XPCNativeWrapper(window.wrappedJSObject.Game);
 
 CCMM.launch = function(){
 	CCMM.init = function(){
@@ -57,4 +51,23 @@ CCMM.launch = function(){
 	requestAnimationFrame(CCMM.delay);
 }
 
-CCMM.loadData(CCMM.launch);
+CCMM.ScriptInjection = function(){
+	var scriptText = `
+		var CCMM = {};
+		CCMM.launch = ` + CCMM.launch.toString() + `
+		CCMM.GuessModId = ` + CCMM.GuessModId.toString() + `
+		CCMM.config = ` + JSON.stringify(CCMM.config) + `
+		CCMM.launch();
+	`;
+	
+	var scriptDiv = document.createElement('script');
+	scriptDiv.textContent = scriptText;
+	scriptDiv.id = 'modscript_CCMM';
+	document.head.appendChild(scriptDiv);
+	
+}
+
+CCMM.loadData(CCMM.ScriptInjection);
+
+// This script brought to you by Chrome being stupid and screwing up page_action popups
+if(chrome) chrome.runtime.sendMessage({"message": "activate_icon"});

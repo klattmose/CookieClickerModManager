@@ -158,10 +158,10 @@ CCMM.activate = function(el){
 	if(el.id.indexOf('ModEnabledButton') > -1){
 		CCMM.toggleModEnabled(el.id);
 	}
-	if(el.id.indexOf('ModEditButton') > -1){
+	else if(el.id.indexOf('ModEditButton') > -1){
 		CCMM.EditMod(el.id);
 	}
-	if(el.id.indexOf('ModLoadButton') > -1){
+	else if(el.id.indexOf('ModLoadButton') > -1){
 		CCMM.LoadMod(el.id);
 	}
 	else{
@@ -238,10 +238,17 @@ CCMM.editModDelete = function(){
 CCMM.LoadMod = function(id){
 	var i = Number(id.replace('ModLoadButton', ''));
 	var mod = CCMM.config.mods[i];
+	var id = CCMM.GuessModId(mod.url)
 	
-	browser.tabs.executeScript({
-		code : `Game.LoadMod('` + mod.url + `');`
-	});
+	var code = `
+		var script = document.createElement('script');
+		script.id = 'modscript_` + id + `';
+		script.setAttribute('src', ` + mod.url + `);
+		document.head.appendChild(script);
+		console.log('Loaded the mod ` + mod.url + `, ` + id + `.');
+	`
+	
+	browser.tabs.executeScript({code : code});
 	
 	mod.isLoaded = 1;
 	CCMM.refreshModlist();
@@ -307,7 +314,7 @@ CCMM.detectLoadedMods = function(){
 	}
 	
 	function onCompletion(result){
-		if(result[0] === undefined) CCMM.LoadedMods = {};
+		if(result === undefined || result[0] === undefined) CCMM.LoadedMods = {};
 		else CCMM.LoadedMods = result[0];
 		
 		for(var i = 0; i < CCMM.config.mods.length; i++){
@@ -320,15 +327,20 @@ CCMM.detectLoadedMods = function(){
 		navigateToMainMenu();
 	}
 	
-	browser.tabs.executeScript({
-		code:  `var scripts = document.getElementsByTagName('script');
+	var code = `var scripts = document.getElementsByTagName('script');
 				var ret = {};
 				for(var i = 0; i < scripts.length; i++){
 					var script = scripts[i];
 					if(script.id.indexOf('modscript_') >- 1) ret[script.id.replace('modscript_', '')] = 1;
 				}
 				ret;`
-	}).then(onCompletion, onError);
+	
+	if(chrome){
+		browser.tabs.executeScript({code: code}, onCompletion);
+	}else{
+		browser.tabs.executeScript({code: code}).then(onCompletion, onError);
+	}
+	
 }
 
 CCMM.refreshModlist = function(){

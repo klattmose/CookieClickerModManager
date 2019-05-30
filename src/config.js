@@ -22,7 +22,7 @@ CCMM.loadData = function(callback){
 	
 	function onGot(item){
 		console.log('storage', item);
-		if(item.config) {
+		if(item.config){
 			CCMM.config = item.config;
 		}else{
 			CCMM.config = CCMM.defaultConfig();
@@ -31,8 +31,7 @@ CCMM.loadData = function(callback){
 		callback();
 	}
 	
-	var getting = browser.storage.local.get();
-	getting.then(onGot, onError);
+	if(chrome) chrome.storage.local.get('config', onGot); else browser.storage.local.get('config').then(onGot, onError);
 }
 
 CCMM.saveData = function(){
@@ -48,7 +47,7 @@ CCMM.GuessModId = function(url){
 }
 
 window.browser = (function () {
-  return window.msBrowser ||
-    window.browser ||
-    window.chrome;
+	return window.msBrowser ||
+		window.browser ||
+		window.chrome;
 })();
