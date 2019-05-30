@@ -1,6 +1,6 @@
 # Cookie Clicker Mod Manager (CCMM)
 
-*Current version : 0.83*
+*Current version : 1.0*
 
 **CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink]. Currently only for Firefox, but plans are in place for compatibility with other browsers.
 
@@ -49,6 +49,10 @@ Any bug or suggestion should be **opened as an issue** [in the repository][Issue
 
 ## Version History
 
+**05/30/2019 - 1.0**
+* Changed a couple of icons
+* Code altered for compatibility with Google chrome
+
 **05/28/2019 - 0.83**
 * Removed a script-injection vulnerability
 * Changed a button's icon and text to be more intuitive
@@ -67,5 +71,5 @@ Anyone who gives a suggestion or bugfix, especially code that gets implemented i
 [FirefoxLink]: https://addons.mozilla.org/en-US/firefox/addon/cookie-clicker-mod-manager/
 [MainMenu]: https://i.imgur.com/CwV00hk.png
 [OptionsMenu]: https://i.imgur.com/8Z4bS6Q.png
-[EditMenu]: https://i.imgur.com/baOqsCd.png
+[EditMenu]: https://i.imgur.com/Qr8vyrr.png
 [IssueLink]: https://github.com/klattmose/CookieClickerModManager/issues
