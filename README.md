@@ -2,13 +2,14 @@
 
 *Current version : 1.0*
 
-**CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink]. Currently only for Firefox, but plans are in place for compatibility with other browsers.
+**CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink].
 
 ## How to use it
 
 Add the extension to your browser. 
 
 * [Firefox][FirefoxLink]
+* [Chrome][ChromeLink]
 
 Once the extension is added to your browser, a small icon of a cookie will appear in the URL bar when you are playing Cookie Clicker (Firefox). Clicking this icon will bring up the Mod Manager Main Menu. 
 
@@ -69,6 +70,7 @@ Anyone who gives a suggestion or bugfix, especially code that gets implemented i
 
 [CookieClickerLink]: https://orteil.dashnet.org/cookieclicker
 [FirefoxLink]: https://addons.mozilla.org/en-US/firefox/addon/cookie-clicker-mod-manager/
+[ChromeLink]: https://chrome.google.com/webstore/detail/cookie-clicker-mod-manage/gehplcbdghdjeinldbgkjdffgkdcpned
 [MainMenu]: https://i.imgur.com/CwV00hk.png
 [OptionsMenu]: https://i.imgur.com/8Z4bS6Q.png
 [EditMenu]: https://i.imgur.com/Qr8vyrr.png
