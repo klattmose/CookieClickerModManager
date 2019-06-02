@@ -1,6 +1,6 @@
 # Cookie Clicker Mod Manager (CCMM)
 
-*Current version : 1.0*
+*Current version : 1.2*
 
 **CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink].
 
@@ -23,6 +23,7 @@ In the Main Menu you can:
 3. Toggle individual mods on and off
 4. Open the Add/Edit Mod Menu
 5. Load mods that aren't already loaded
+6. Reorder mods by dragging and dropping
 
 ### Options Menu
 
@@ -50,6 +51,10 @@ Any bug or suggestion should be **opened as an issue** [in the repository][Issue
 
 ## Version History
 
+**06/02/2019 - 1.2**
+* Some style changes
+* Drag 'n' drop functionality for reordering mods
+
 **05/30/2019 - 1.0**
 * Changed a couple of icons
 * Code altered for compatibility with Google chrome
@@ -71,7 +76,7 @@ Anyone who gives a suggestion or bugfix, especially code that gets implemented i
 [CookieClickerLink]: https://orteil.dashnet.org/cookieclicker
 [FirefoxLink]: https://addons.mozilla.org/en-US/firefox/addon/cookie-clicker-mod-manager/
 [ChromeLink]: https://chrome.google.com/webstore/detail/cookie-clicker-mod-manage/gehplcbdghdjeinldbgkjdffgkdcpned
-[MainMenu]: https://i.imgur.com/CwV00hk.png
-[OptionsMenu]: https://i.imgur.com/8Z4bS6Q.png
-[EditMenu]: https://i.imgur.com/Qr8vyrr.png
+[MainMenu]: https://i.imgur.com/UsP1mHg.png
+[OptionsMenu]: https://i.imgur.com/vsV9hww.png
+[EditMenu]: https://i.imgur.com/3agOOti.png
 [IssueLink]: https://github.com/klattmose/CookieClickerModManager/issues
