@@ -275,6 +275,71 @@ CCMM.RestoreDefaultConfig = function(){
 
 
 //***********************************
+//    Drag 'n' drop reordering
+//    Largely copied from https://codepen.io/retrofuturistic/pen/tlbHE
+//***********************************
+CCMM.handleDragStart = function(i){
+	return function(e){
+		// Target (this) element is the source node.
+		e.dataTransfer.effectAllowed = 'move';
+		e.dataTransfer.setData('text/html', this.parentElement.outerHTML);
+		
+		this.parentElement.classList.add('dragElem');
+		
+		CCMM.draggingMod = i;
+	}
+}
+
+CCMM.handleDragOver = function(e){
+	if (e.preventDefault) {
+		e.preventDefault(); // Necessary. Allows us to drop.
+	}
+	this.classList.add('over');
+	
+	e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+	
+	return false;
+}
+
+CCMM.handleDragEnter = function(e){
+	// this / e.target is the current hover target.
+}
+
+CCMM.handleDragLeave = function(e){
+	this.classList.remove('over');  // this / e.target is previous target element.
+}
+
+CCMM.handleDrop = function(e){
+	// this/e.target is current target element.
+	
+	if (e.stopPropagation) {
+		e.stopPropagation(); // Stops some browsers from redirecting.
+	}
+	
+	// Don't do anything if dropping the same column we're dragging.
+	if (dragSrcEl != this) {
+		// Set the source column's HTML to the HTML of the column we dropped on.
+		//alert(this.outerHTML);
+		//dragSrcEl.innerHTML = this.innerHTML;
+		//this.innerHTML = e.dataTransfer.getData('text/html');
+		this.parentNode.removeChild(dragSrcEl);
+		var dropHTML = e.dataTransfer.getData('text/html');
+		this.insertAdjacentHTML('beforebegin',dropHTML);
+		var dropElem = this.previousSibling;
+		addDnDHandlers(dropElem);
+	}
+	
+	this.classList.remove('over');
+	return false;
+}
+
+CCMM.handleDragEnd = function(e){
+	// this/e.target is the source node.
+	this.classList.remove('over');
+}
+
+
+//***********************************
 //    Load the configuration
 //    and create the menu
 //***********************************
@@ -332,6 +397,8 @@ CCMM.detectLoadedMods = function(){
 }
 
 CCMM.refreshModlist = function(){
+	CCMM.draggingMod = -1;
+	
 	var modListDiv = l('modListDiv');
 	modListDiv.innerHTML = '';
 	
@@ -350,6 +417,12 @@ CCMM.refreshModlist = function(){
 			enabledIcon.classList.add('fa'); 
 			enabledIcon.classList.add(mod.enabled ? 'fa-check' : 'fa-times'); 
 			enabledButton.appendChild(enabledIcon);
+		var dragAnchor = document.createElement('i');
+			dragAnchor.classList.add('icon'); 
+			dragAnchor.classList.add('fa'); 
+			dragAnchor.classList.add('fa-arrows'); 
+			dragAnchor.draggable = true;
+			div.appendChild(dragAnchor);
 		var nameItem = document.createElement('menuitem'); 
 			div.appendChild(nameItem);
 		var nameText = document.createElement('span'); 
@@ -372,6 +445,8 @@ CCMM.refreshModlist = function(){
 		}
 		
 		modListDiv.appendChild(div);
+		
+		dragAnchor.addEventListener('dragstart', CCMM.handleDragStart(i));
 	}
 }
 
