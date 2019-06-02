@@ -8,12 +8,12 @@
 html, body{
 	margin: 0;
 	padding: 0;
+	background-color: #F0F0F0;
 }
 body{
 	cursor: default;
 	font: caption;
-	min-height: 450px;
-	width: 300px;
+	width: 400px;
 	overflow: hidden;
 }
 body#rendering{ display: none; }
@@ -116,17 +116,6 @@ menuitem:focus{
 menuitem[disabled]{
 	opacity: 0.65;
 }
-menuitem .arrow{
-	background: url(/icons/next.svg) center center no-repeat;
-	display: inline-block;
-	height: 100%;
-	opacity: 1.0;
-	position: absolute;
-	right: 12px;
-	top: 0;
-	transform: rotate(180deg);
-	width: 12px;
-}
 
 p menuitem{
 	padding-left: 0;
@@ -151,6 +140,14 @@ menu heading{
 	padding-left: 21px;
 }
 
+#modListDiv{
+	margin-top: 5px;
+	height: 465px;
+	overflow-y: auto;
+	background-color: #FFFFFF;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.9);
+}
+
 .mod-listing{
 	display: block;
 	overflow-x: hidden;
@@ -170,10 +167,6 @@ menu heading{
 	height: 100%;
 }
 
-#optionsImportError{
-	color : red;
-}
-
 
 /******************************** OPTIONS ************************************/
 
@@ -191,6 +184,10 @@ section.options #add-exclude-current{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	width: 90vw;
+}
+
+#optionsImportError{
+	color : red;
 }
 
 
