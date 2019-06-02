@@ -282,55 +282,46 @@ CCMM.handleDragStart = function(i){
 	return function(e){
 		// Target (this) element is the source node.
 		e.dataTransfer.effectAllowed = 'move';
-		e.dataTransfer.setData('text/html', this.parentElement.outerHTML);
-		
+		e.dataTransfer.setData("text/plain", CCMM.config.mods[i].name);
 		this.parentElement.classList.add('dragElem');
-		
 		CCMM.draggingMod = i;
 	}
-}
-
-CCMM.handleDragOver = function(e){
-	if (e.preventDefault) {
-		e.preventDefault(); // Necessary. Allows us to drop.
-	}
-	this.classList.add('over');
-	
-	e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
-	
-	return false;
 }
 
 CCMM.handleDragEnter = function(e){
 	// this / e.target is the current hover target.
 }
 
+CCMM.handleDragOver = function(e){
+	if(e.preventDefault){
+		e.preventDefault(); // Necessary. Allows us to drop.
+	}
+	this.classList.add('over');
+	e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+	return false;
+}
+
 CCMM.handleDragLeave = function(e){
 	this.classList.remove('over');  // this / e.target is previous target element.
 }
 
-CCMM.handleDrop = function(e){
-	// this/e.target is current target element.
-	
-	if (e.stopPropagation) {
-		e.stopPropagation(); // Stops some browsers from redirecting.
+CCMM.handleDrop = function(i){
+	return function(e){
+		// this/e.target is current target element.
+		if(e.stopPropagation){
+			e.stopPropagation(); // Stops some browsers from redirecting.
+		}
+		
+		if(i != CCMM.draggingMod){
+			var temp = CCMM.config.mods[CCMM.draggingMod];
+			CCMM.config.mods.splice(i, 0, temp);
+			CCMM.config.mods.splice(CCMM.draggingMod + (i < CCMM.draggingMod ? 1 : 0), 1);
+			CCMM.saveData();
+		}
+		
+		CCMM.refreshModlist();
+		return false;
 	}
-	
-	// Don't do anything if dropping the same column we're dragging.
-	if (dragSrcEl != this) {
-		// Set the source column's HTML to the HTML of the column we dropped on.
-		//alert(this.outerHTML);
-		//dragSrcEl.innerHTML = this.innerHTML;
-		//this.innerHTML = e.dataTransfer.getData('text/html');
-		this.parentNode.removeChild(dragSrcEl);
-		var dropHTML = e.dataTransfer.getData('text/html');
-		this.insertAdjacentHTML('beforebegin',dropHTML);
-		var dropElem = this.previousSibling;
-		addDnDHandlers(dropElem);
-	}
-	
-	this.classList.remove('over');
-	return false;
 }
 
 CCMM.handleDragEnd = function(e){
@@ -447,6 +438,11 @@ CCMM.refreshModlist = function(){
 		modListDiv.appendChild(div);
 		
 		dragAnchor.addEventListener('dragstart', CCMM.handleDragStart(i));
+		div.addEventListener('dragenter', CCMM.handleDragEnter);
+		div.addEventListener('dragover', CCMM.handleDragOver);
+		div.addEventListener('dragleave', CCMM.handleDragLeave);
+		div.addEventListener('drop', CCMM.handleDrop(i));
+		div.addEventListener('dragend', CCMM.handleDragEnd);
 	}
 }
 
