@@ -40,6 +40,7 @@ Here you can
 ![Edit menu][EditMenu]
 
 1. Paste the URL of the mod you want to add into the "URL" textbox (no such thing as intuitive design)
+	* If transferring from a bookmarklet, the URL is only the part between the parentheses after "Game.LoadMod" (sans the quotation marks)
 2. When the URL is changed, CCMM tries to guess a name for the mod in the "Name" textbox. This can be overwritten
 3. Any changes you make will not take effect until you click "Save changes"
 4. Click "Cancel" to undo all changes and return to the Main Menu
