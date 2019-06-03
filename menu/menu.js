@@ -173,6 +173,7 @@ CCMM.showOptions = function(){
 	CCMM.MainFocusedItem = document.activeElement;
 	document.body.id = 'options';
 	l('optionsConfigText').value = JSON.stringify(CCMM.config, null, 2);
+	l('optionsUnsaved').style = 'display:none;';
 	l('optionsImportError').style = 'display:none;';
 }
 
@@ -253,6 +254,11 @@ CCMM.ExportToFile = function(){
 	saveAs(blob, filename);
 }
 
+CCMM.changedConfig = function(){
+	l('optionsUnsaved').style = 'display:block;';
+	l('optionsImportError').style = 'display:none;';
+}
+
 CCMM.ImportConfig = function(){
 	var text = l('optionsConfigText').value;
 	
@@ -261,6 +267,7 @@ CCMM.ImportConfig = function(){
 		CCMM.detectLoadedMods();
 		CCMM.saveData();
 		l('optionsImportError').style = 'display:none;';
+		l('optionsUnsaved').style = 'display:none;';
 	}catch(err){
 		l('optionsImportError').textContent = err.message;
 		l('optionsImportError').style = 'display:block;';
@@ -268,9 +275,8 @@ CCMM.ImportConfig = function(){
 }
 
 CCMM.RestoreDefaultConfig = function(){
-	CCMM.config = CCMM.defaultConfig();
-	CCMM.detectLoadedMods();
-	CCMM.saveData();
+	l('optionsConfigText').value = JSON.stringify(CCMM.defaultConfig(), null, 2);
+	CCMM.changedConfig();
 }
 
 
@@ -341,6 +347,7 @@ CCMM.configLoaded = function(){
 	// Apparently doing this in html doesn't work
 	l('editModURL').oninput = CCMM.editModChangeUrl;
 	l('editModName').oninput = CCMM.editModChangeName;
+	l('optionsConfigText').oninput = CCMM.changedConfig;
 }
 
 CCMM.showGlobalEnabled = function(){
