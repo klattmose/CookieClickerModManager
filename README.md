@@ -1,6 +1,6 @@
 # Cookie Clicker Mod Manager (CCMM)
 
-*Current version : 1.2*
+*Current version : 1.2.2*
 
 **CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink].
 
@@ -33,7 +33,7 @@ Here you can
 1. View CCMM's current configuration (in JSON format)
 2. Any changes you make in the text box will not take effect until you click "Save changes"
 3. Back up your configuration to a file for safekeeping
-4. As a just-in-case, you can restore CCMM to its default settings
+4. As a just-in-case, you can restore CCMM to its default settings (will not take effect until "Save changes" is clicked)
 
 ### Add/Edit Mod Menu
 
@@ -54,6 +54,11 @@ Here you can
 Any bug or suggestion should be **opened as an issue** [in the repository][IssueLink] for easier tracking. This allows me to close issues once they're fixed.
 
 ## Version History
+
+**06/07/2019 - 1.2.2**
+* Can now right-click to paste things
+* Options menu now gives a message when unsaved changes are present
+* "Restore default config" button now only changes the content of the text-box. The user will still need to click the "Save changes" button before it will take effect
 
 **06/02/2019 - 1.2**
 * Some style changes
