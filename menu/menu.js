@@ -12,11 +12,11 @@ function onLoad(){
 }
 
 function onContextMenu(event){
-	event.preventDefault();
-	event.stopPropagation();
+	CCMM.onContext = true;
 }
 
 function onClick(event){
+	CCMM.onContext = false;
 	if(event.which != 1){
 		event.preventDefault();
 		event.stopPropagation();
@@ -28,11 +28,13 @@ function onClick(event){
 function onMouseOver(event){
 	let el = event.target;
 	while (el && el.tagName != 'MENUITEM') el = el.parentNode;
-	if(el && el.hasAttribute('tabindex')) el.focus();
+	if(!CCMM.onContext && el && el.hasAttribute('tabindex')){
+		el.focus();
+	}
 }
 
 function onMouseOut(){
-	document.activeElement.blur();
+	if(!CCMM.onContext) document.activeElement.blur();
 }
 
 function onKeyDown(event){
@@ -341,6 +343,7 @@ CCMM.handleDragEnd = function(e){
 //    and create the menu
 //***********************************
 CCMM.configLoaded = function(){
+	CCMM.onContext = false;
 	CCMM.showGlobalEnabled();
 	CCMM.detectLoadedMods();
 	
