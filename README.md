@@ -1,6 +1,6 @@
 # Cookie Clicker Mod Manager (CCMM)
 
-*Current version : 1.2.2*
+*Current version : 1.3.2*
 
 **CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink].
 
@@ -54,6 +54,9 @@ Here you can
 Any bug or suggestion should be **opened as an issue** [in the repository][IssueLink] for easier tracking. This allows me to close issues once they're fixed.
 
 ## Version History
+
+**08/11/2019 - 1.3.2**
+* Changed the default configuration
 
 **06/07/2019 - 1.2.2**
 * Can now right-click to paste things
