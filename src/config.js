@@ -3,13 +3,6 @@ if(CCMM === undefined) var CCMM = {};
 CCMM.defaultConfig = function(){
 	return {
 		mods : [
-			{
-				name : 'CCSE',
-				url : 'https://klattmose.github.io/CookieClicker/CCSE.js',
-				enabled : 1,
-				waitForScriptLoad : 1,
-				extraDelay : 0
-			}
 		],
 		enabled : true
 	}
