@@ -421,7 +421,7 @@ CCMM.refreshModlist = function(){
 		var dragAnchor = document.createElement('i');
 			dragAnchor.classList.add('icon'); 
 			dragAnchor.classList.add('fa'); 
-			dragAnchor.classList.add('fa-arrows'); 
+			dragAnchor.classList.add('fa-arrows-alt'); 
 			dragAnchor.draggable = true;
 			div.appendChild(dragAnchor);
 		var nameItem = document.createElement('menuitem'); 
