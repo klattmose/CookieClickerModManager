@@ -18,10 +18,11 @@ CCMM.launch = function(){
 			
 			var script = document.createElement('script');
 			script.id = 'modscript_' + id;
-			script.setAttribute('src', mod.url);
+			script.setAttribute('src', mod.url + (CCMM.config.cache ? '' : '?v='+Date.now()));
 			
-			if(mod.waitForScriptLoad){
-				script.onload = delayFunc;
+			if(!CCMM.config.async){
+				script.onload  = delayFunc;
+				script.onerror = delayFunc;			// Load the next one regardless of the failure of this one
 				document.head.appendChild(script);
 			}else{
 				document.head.appendChild(script);

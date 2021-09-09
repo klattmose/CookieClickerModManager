@@ -1,6 +1,6 @@
 # Cookie Clicker Mod Manager (CCMM)
 
-*Current version : 1.3.5*
+*Current version : 1.4.0*
 
 **CCMM** is a browser extension to manage the javascript add-ons a player may want to use with the game [Cookie Clicker][CookieClickerLink].
 
@@ -19,21 +19,23 @@ Once the extension is added to your browser, a small icon of a cookie will appea
 
 In the Main Menu you can:
 1. Toggle CCMM on and off
-2. Open the Options Menu
-3. Toggle individual mods on and off
-4. Open the Add/Edit Mod Menu
-5. Load mods that aren't already loaded
-6. Reorder mods by dragging and dropping
+1. Open the Options Menu
+1. Toggle individual mods on and off
+1. Open the Add/Edit Mod Menu
+1. Load mods that aren't already loaded
+1. Reorder mods by dragging and dropping
 
 ### Options Menu
 
 ![Options menu][OptionsMenu]
 
 Here you can 
+1. Toggle Asynchronous mode, which may load faster, but also may load mods out of order
+1. Toggle Cached mode, which may load faster, but also may not load the latest version of a mod
 1. View CCMM's current configuration (in JSON format)
-2. Any changes you make in the text box will not take effect until you click "Save changes"
-3. Back up your configuration to a file for safekeeping
-4. As a just-in-case, you can restore CCMM to its default settings (will not take effect until "Save changes" is clicked)
+1. Any changes you make in the text box will not take effect until you click "Save changes"
+1. Back up your configuration to a file for safekeeping
+1. As a just-in-case, you can restore CCMM to its default settings (will not take effect until "Save changes" is clicked)
 
 ### Add/Edit Mod Menu
 
@@ -41,19 +43,24 @@ Here you can
 
 1. Paste the URL of the mod you want to add into the "URL" textbox (no such thing as intuitive design)
 	* If transferring from a bookmarklet, the URL is only the part between the parentheses after "Game.LoadMod"
-	*     javascript:(function() {Game.LoadMod('https://aktanusa.github.io/CookieMonster/CookieMonster.js');}());
+	*     javascript:(function() {Game.LoadMod('https://cookiemonsterteam.github.io/CookieMonster/dist/CookieMonster.js');}());
 	* would become
-	*     https://aktanusa.github.io/CookieMonster/CookieMonster.js
-2. When the URL is changed, CCMM tries to guess a name for the mod in the "Name" textbox. This can be overwritten
-3. Any changes you make will not take effect until you click "Save changes"
-4. Click "Cancel" to undo all changes and return to the Main Menu
-5. "Delete" will, naturally, remove the currently selected mod
+	*     https://cookiemonsterteam.github.io/CookieMonster/dist/CookieMonster.js
+1. When the URL is changed, CCMM tries to guess a name for the mod in the "Name" textbox. This can be overwritten
+1. Any changes you make will not take effect until you click "Save changes"
+1. Click "Cancel" to undo all changes and return to the Main Menu
+1. "Delete" will, naturally, remove the currently selected mod
 
 ## Bugs and suggestions
 
 Any bug or suggestion should be **opened as an issue** [in the repository][IssueLink] for easier tracking. This allows me to close issues once they're fixed.
 
 ## Version History
+
+**09/08/2020 - 1.4.0**
+* Now waits for the script of one mod to be loaded before starting the next one
+* Also always reloads a mod, ignoring any cached version
+* The changes can be undone in the Options menu
 
 **06/20/2020 - 1.3.5**
 * Fixed the drag-and-drop reordering mechanic
@@ -95,6 +102,6 @@ Anyone who gives a suggestion or bugfix, especially code that gets implemented i
 [FirefoxLink]: https://addons.mozilla.org/en-US/firefox/addon/cookie-clicker-mod-manager/
 [ChromeLink]: https://chrome.google.com/webstore/detail/cookie-clicker-mod-manage/gehplcbdghdjeinldbgkjdffgkdcpned
 [MainMenu]: https://i.imgur.com/UsP1mHg.png
-[OptionsMenu]: https://i.imgur.com/vsV9hww.png
+[OptionsMenu]: https://i.imgur.com/QSBJOjF.png
 [EditMenu]: https://i.imgur.com/3agOOti.png
 [IssueLink]: https://github.com/klattmose/CookieClickerModManager/issues

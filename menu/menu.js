@@ -155,6 +155,12 @@ CCMM.activate = function(el){
 		case 'optionDefaultConfig':
 			CCMM.RestoreDefaultConfig();
 			return;
+		case 'optionAsync':
+			CCMM.toggleOptionEnabled('async');
+			return;
+		case 'optionCache':
+			CCMM.toggleOptionEnabled('cache');
+			return;
 	}
 	
 	if(el.id.indexOf('ModEnabledButton') > -1){
@@ -174,6 +180,22 @@ CCMM.activate = function(el){
 CCMM.showOptions = function(){
 	CCMM.MainFocusedItem = document.activeElement;
 	document.body.id = 'options';
+	
+	if(CCMM.config.async){
+		l('option_async').classList.add('fa-check');
+		l('option_async').classList.remove('fa-times');
+	}else{
+		l('option_async').classList.remove('fa-check');
+		l('option_async').classList.add('fa-times');
+	}
+	if(CCMM.config.cache){
+		l('option_cache').classList.add('fa-check');
+		l('option_cache').classList.remove('fa-times');
+	}else{
+		l('option_cache').classList.remove('fa-check');
+		l('option_cache').classList.add('fa-times');
+	}
+	
 	l('optionsConfigText').value = JSON.stringify(CCMM.config, null, 2);
 	l('optionsUnsaved').style = 'display:none;';
 	l('optionsImportError').style = 'display:none;';
@@ -193,13 +215,20 @@ CCMM.toggleModEnabled = function(id){
 	CCMM.saveData();
 }
 
+CCMM.toggleOptionEnabled = function(id){
+	CCMM.config[id] = !CCMM.config[id];
+	CCMM.showOptions();
+	CCMM.saveData();
+	return CCMM.config[id];
+}
+
 CCMM.EditMod = function(id){
 	CCMM.MainFocusedItem = document.activeElement;
 	document.body.id = 'editMod';
 	
 	if(id == CCMM.config.mods.length){ // Adding a new mod
 		CCMM.tempModId = id;
-		CCMM.tempMod = {name : '', url : '', enabled : 1, waitForScriptLoad : 0, extraDelay : 0, isLoaded : 0};
+		CCMM.tempMod = {name : '', url : '', enabled : 1, extraDelay : 0, isLoaded : 0};
 		l('editModHeaderText').innerHTML = 'Add Mod';
 	}
 	else{ // Editing already existing mod

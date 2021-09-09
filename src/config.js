@@ -2,9 +2,10 @@ if(CCMM === undefined) var CCMM = {};
 
 CCMM.defaultConfig = function(){
 	return {
-		mods : [
-		],
-		enabled : true
+	  "async": false,
+	  "cache": false,
+	  "enabled": true,
+	  "mods": []
 	}
 }
 

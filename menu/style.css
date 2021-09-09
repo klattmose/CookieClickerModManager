@@ -14,7 +14,7 @@ body{
 	cursor: default;
 	font: caption;
 	width: 400px;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 body#rendering{ display: none; }
 
@@ -188,6 +188,10 @@ section.options #add-exclude-current{
 
 #optionsImportError{
 	color : red;
+}
+
+input{
+	margin-right: 5px;
 }
 
 
