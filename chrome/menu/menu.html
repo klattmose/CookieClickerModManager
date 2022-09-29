@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/third-party/shoelace/shoelace.css">
+<link rel="stylesheet" href="/third-party/fontawesome-free-5.10.1-web/css/all.css">
+<link rel="stylesheet" href="./style.css">
+<meta name="viewport" content="width=300, initial-scale=1">
+</head>
+<body id="rendering">
+
+<section class="main-menu">
+	<menu>
+		<menuitem id="toggleGlobalEnabledButton" tabindex="0">
+			<i id="globalEnabledIcon" class="icon fa fa-check"></i>
+			<span id="globalEnabledText" class="text">Cookie Clicker Mod Manager</span>
+		</menuitem>
+		<menuitem id="optionsButton" tabindex="0">
+			<i class="icon fa fa-fw fa-cogs"></i>
+			<span class="text">Options</span>
+			<i class="icon fa fa-chevron-right floatRight"></i>
+		</menuitem>
+		<hr>
+		<heading>Mod list</heading>
+		<div id="modListDiv"></div>
+		<menuitem id="newModButton" tabindex="0">
+			<i class="icon fa fa-fw fa-plus"></i>
+			<span class="text">Register new mod</span>
+			<i class="icon fa fa-chevron-right floatRight"></i>
+		</menuitem>
+		<menuitem id="padding" style="height:12px;"></menuitem>
+	</menu>
+</section>
+
+
+<section class="options">
+	<header>
+		<menuitem tabindex="0" class="go-back"><i class="icon fa fa-chevron-left"></i></menuitem>
+		Options
+	</header>
+	<hr>
+	<p>
+		<menuitem id="optionAsync" tabindex="0"><i id="option_async" class="icon fa fa-check"></i><span class="text">Load asynchronously</span></menuitem>
+		<menuitem id="optionCache" tabindex="0"><i id="option_cache" class="icon fa fa-check"></i><span class="text">Allow cache</span></menuitem>
+	</p>
+	<hr>
+	<h2>Your config:</h2>
+	<p><textarea rows="14" id="optionsConfigText"></textarea></p>
+	<heading id="optionsUnsaved" style="display:none;">*You have unsaved changes</heading>
+	<heading id="optionsImportError" style="display:none;"></heading>
+	<menuitem id="optionImportConfig" tabindex="0">
+		<i class="icon fa fa-save"></i>
+		<span class="text">Save changes</span>
+	</menuitem>
+	<menuitem id="optionEportConfig" tabindex="0">
+		<i class="icon fa fa-download"></i>
+		<span class="text">Export config to file</span>
+	</menuitem>
+	<menuitem id="optionDefaultConfig" tabindex="0">
+		<i class="icon fa fa-bolt"></i>
+		<span class="text">Restore default config</span>
+	</menuitem>
+</section>
+
+
+<section class="editMod">
+	<header>
+		<menuitem tabindex="0" class="go-back"><i class="icon fa fa-chevron-left"></i></menuitem>
+		<span id="editModHeaderText" class="text">Edit Mod</span>
+	</header>
+	<hr>
+	<h2>URL</h2>
+	<p><textarea rows="3" id="editModURL"></textarea></p>
+	<h2>Name</h2>
+	<p><textarea rows="1" id="editModName"></textarea></p>
+	<hr>
+	<menuitem id="editModSaveChanges" tabindex="0">
+		<i class="icon fa fa-save"></i>
+		<span class="text">Save changes</span>
+	</menuitem>
+	<menuitem id="editModCancel" tabindex="0">
+		<i class="icon fa fa-times"></i>
+		<span class="text">Cancel</span>
+	</menuitem>
+	<hr>
+	<menuitem id="editModDelete" tabindex="0">
+		<i class="icon fa fa-trash-alt"></i>
+		<span class="text">Delete</span>
+	</menuitem>
+	
+</section>
+
+<script src="/src/config.js"></script>
+<script src="./menu.js"></script>
+
+</body>
+</html>

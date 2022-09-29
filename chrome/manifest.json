@@ -1,0 +1,60 @@
+{
+	"manifest_version": 3,
+	"name": "Cookie Clicker Mod Manager",
+	"version": "1.5.0",
+	
+	"description": "Cookie Clicker Mod Manager",
+	
+	"icons": {
+		"48": "icons/CCMM-48.png",
+		"96": "icons/CCMM-96.png"
+	},
+	
+	"content_scripts": [{
+		"matches": [
+			"*://orteil.dashnet.org/cookieclicker/",
+			"*://orteil.dashnet.org/cookieclicker/beta/",
+			"*://cookieclicker.eu/cookieclicker/",
+			"*://cookieclicker.eu/cookieclicker/beta/"
+		],
+		"js": ["/src/config.js", "/src/CCMM.js"]
+	}],
+
+	"web_accessible_resources": [{
+		"resources": ["/src/mainModLoader.js", "/src/adhocModLoader.js"],
+		"matches": ["<all_urls>"]
+	}],
+
+	"action": {
+		"browser_style": false,
+		"default_icon": "icons/CCMM-48.png",
+		"default_popup": "/menu/menu.html",
+		"default_title": "Cookie Clicker Mod Manager",
+		"show_matches": [
+			"*://orteil.dashnet.org/cookieclicker/",
+			"*://orteil.dashnet.org/cookieclicker/beta/",
+			"*://cookieclicker.eu/cookieclicker/",
+			"*://cookieclicker.eu/cookieclicker/beta/"
+		]
+	},
+	
+	"background": {
+		"service_worker": "/menu/background.js"
+	},
+	
+	"options_ui": {
+		"page": "/menu/menu.html"
+	},
+	
+	"permissions": [
+		"storage",
+		"scripting"
+	],
+	
+	"host_permissions": [
+		"*://orteil.dashnet.org/cookieclicker/",
+		"*://orteil.dashnet.org/cookieclicker/beta/",
+		"*://cookieclicker.eu/cookieclicker/",
+		"*://cookieclicker.eu/cookieclicker/beta/"
+	]
+}
